@@ -106,3 +106,15 @@
 [submodule "src/system_logic/toolbox_engine"]
 	path = src/system_logic/toolbox_engine
 	url = git@github.com:cpp-toolbox/toolbox_engine.git
+[submodule "src/utility/timer"]
+	path = src/utility/timer
+	url = git@github.com:cpp-toolbox/timer.git
+[submodule "src/graphics/culling"]
+	path = src/graphics/culling
+	url = git@github.com:cpp-toolbox/culling.git
+[submodule "src/graphics/screen_space_sizer"]
+	path = src/graphics/screen_space_sizer
+	url = git@github.com:cpp-toolbox/screen_space_sizer.git
+[submodule "src/graphics/drawer"]
+	path = src/graphics/drawer
+	url = git@github.com:cpp-toolbox/drawer.git
