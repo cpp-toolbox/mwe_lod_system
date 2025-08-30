@@ -118,3 +118,9 @@
 [submodule "src/graphics/drawer"]
 	path = src/graphics/drawer
 	url = git@github.com:cpp-toolbox/drawer.git
+[submodule "src/utility/linalg_utils"]
+	path = src/utility/linalg_utils
+	url = git@github.com:cpp-toolbox/linalg_utils.git
+[submodule "src/utility/collection_utils"]
+	path = src/utility/collection_utils
+	url = git@github.com:cpp-toolbox/collection_utils.git

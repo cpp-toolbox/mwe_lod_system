@@ -211,12 +211,15 @@ template <Indexable Container> Container rotate(const Container &c, int shift) {
 
 int main() {
 
-    ToolboxEngine tbx_engine("fps camera with geom");
+    ToolboxEngine tbx_engine("fps camera with geom",
+                             {ShaderType::CWL_V_TRANSFORMATION_UBOS_1024_WITH_SOLID_COLOR,
+                              ShaderType::ABSOLUTE_POSITION_WITH_COLORED_VERTEX},
+                             {});
 
     tbx_engine.fps_camera.fov.add_observer([&](const float &new_value) {
-        tbx_engine.shader_cache.set_uniform(
-            ShaderType::CWL_V_TRANSFORMATION_UBOS_1024_WITH_SOLID_COLOR, ShaderUniformVariable::CAMERA_TO_CLIP,
-            tbx_engine.fps_camera.get_projection_matrix(tbx_engine.window.width_px, tbx_engine.window.height_px));
+        tbx_engine.shader_cache.set_uniform(ShaderType::CWL_V_TRANSFORMATION_UBOS_1024_WITH_SOLID_COLOR,
+                                            ShaderUniformVariable::CAMERA_TO_CLIP,
+                                            tbx_engine.fps_camera.get_projection_matrix());
     });
 
     tbx_engine::register_input_graphics_sound_config_handlers(tbx_engine.configuration, tbx_engine.fps_camera,
@@ -230,9 +233,6 @@ int main() {
 
     tbx_engine.shader_cache.set_uniform(ShaderType::CWL_V_TRANSFORMATION_UBOS_1024_WITH_SOLID_COLOR,
                                         ShaderUniformVariable::RGBA_COLOR, glm::vec4(colors::cyan, 1));
-
-    GLFWLambdaCallbackManager glcm = tbx_engine::create_default_glcm_for_input_and_camera(
-        tbx_engine.input_state, tbx_engine.fps_camera, tbx_engine.window, tbx_engine.shader_cache);
 
     auto background = vertex_geometry::Rectangle(glm::vec3(0.5, 0.5, 0), 0.4, 0.1);
     auto background_ivp = draw_info::IVPColor(background.get_ivs(), colors::grey);
@@ -294,9 +294,9 @@ int main() {
         drawer.add_object(ivp, ivp_draw_func_id, ivp_delete_func_id);
     }
 
-    tbx_engine.shader_cache.set_uniform(
-        ShaderType::CWL_V_TRANSFORMATION_UBOS_1024_WITH_SOLID_COLOR, ShaderUniformVariable::CAMERA_TO_CLIP,
-        tbx_engine.fps_camera.get_projection_matrix(tbx_engine.window.width_px, tbx_engine.window.height_px));
+    tbx_engine.shader_cache.set_uniform(ShaderType::CWL_V_TRANSFORMATION_UBOS_1024_WITH_SOLID_COLOR,
+                                        ShaderUniformVariable::CAMERA_TO_CLIP,
+                                        tbx_engine.fps_camera.get_projection_matrix());
 
     tbx_engine.shader_cache.set_uniform(ShaderType::ABSOLUTE_POSITION_WITH_COLORED_VERTEX,
                                         ShaderUniformVariable::ASPECT_RATIO,
@@ -307,9 +307,9 @@ int main() {
     std::function<void(double)> tick = [&](double dt) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        tbx_engine.shader_cache.set_uniform(
-            ShaderType::CWL_V_TRANSFORMATION_UBOS_1024_WITH_SOLID_COLOR, ShaderUniformVariable::CAMERA_TO_CLIP,
-            tbx_engine.fps_camera.get_projection_matrix(tbx_engine.window.width_px, tbx_engine.window.height_px));
+        tbx_engine.shader_cache.set_uniform(ShaderType::CWL_V_TRANSFORMATION_UBOS_1024_WITH_SOLID_COLOR,
+                                            ShaderUniformVariable::CAMERA_TO_CLIP,
+                                            tbx_engine.fps_camera.get_projection_matrix());
 
         tbx_engine.shader_cache.set_uniform(ShaderType::CWL_V_TRANSFORMATION_UBOS_1024_WITH_SOLID_COLOR,
                                             ShaderUniformVariable::WORLD_TO_CAMERA,
